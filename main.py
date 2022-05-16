@@ -1,16 +1,15 @@
-def find_mod_inv(a,m):
+from utils import meta, euclidean, extendedEuclidean, inverse
+from affine_encryption import encrypt, decrypt
 
-    for x in range(1,m):
-        if((a%m)*(x%m) % m==1):
-            return x
-    raise Exception('No existe el inverso modular.')
+cipher_message: str="SLBCMVRBSHZBTÑSRQVVMSZBVHÑBVRQVLALHZBTÑSRQVWQAXLZWÑAQFQV"
+text = "{0},{1} = {msg}"
 
-a = 13
-m = 22
+for x in range(len(meta)):
+  if (x % 3 != 0):
+    for y in range(len(meta)):
+      print(text.format(x, y, msg=decrypt(x,y,cipher_message)))
 
-try:
-    res=find_mod_inv(a,m)
-    print("El inverso modular es: "+ str(res))
+found = 23, 17
 
-except:
-    print('No existe el inverso modular')
+print("".join(['-' for _ in range(len(meta) * 2)]))
+print(text.format(*found, msg=decrypt(*found,cipher_message)))
